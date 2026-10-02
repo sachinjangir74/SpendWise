@@ -1,251 +1,399 @@
-﻿# ðŸ’° SpendWise
+﻿# 💰 SpendWise
 
-A modern, offline-first Personal Expense Tracker Android app built with Kotlin, Jetpack Compose, and Room database. The app follows the MVVM architecture pattern and features a premium Material3 design with smooth animations, category-based filtering, and visual spending summaries.
+SpendWise is a modern, offline-first Android expense tracker built with **Kotlin** and **Jetpack Compose**.
 
-## âœ¨ Features
+The application helps users record, organize, filter, and analyze their personal expenses through a clean Material 3 interface. It uses **Room Database** for local persistence and follows the **MVVM architecture** with a repository layer for clean separation of concerns.
 
-| Feature | Description |
-|---------|-------------|
-| âž• **Add Expense** | Quick expense entry with amount, category, title, note, and date |
-| ðŸ“‹ **Expense List** | View all expenses grouped by date with "Today"/"Yesterday" headers |
-| ðŸ·ï¸ **Category Filter** | Filter expenses by 7 categories using scrollable chips |
-| ðŸ“Š **Summary Dashboard** | Visual spending breakdown with animated bar charts |
-| ðŸ—‘ï¸ **Swipe to Delete** | Swipe left on any expense card to delete it |
-| ðŸŒ™ **Dark Mode** | Full dark mode support following system theme |
-| ðŸ’¾ **Offline Storage** | All data stored locally with Room database |
-| ðŸŽ¨ **Premium UI** | Gradient cards, smooth transitions, and micro-animations |
+---
 
-## ðŸ› ï¸ Tech Stack
+## ✨ Features
+
+- ➕ **Add Expense** — Add an expense with amount, category, title, note, and date.
+- 🧾 **Expense List** — View all recorded expenses grouped by date.
+- 🏷️ **Category Filter** — Filter expenses by category using interactive filter chips.
+- 📊 **Summary Dashboard** — View spending summaries and category-based analytics.
+- 🗑️ **Swipe to Delete** — Swipe an expense card to delete it.
+- 🌙 **Dark Mode** — Supports the system theme and dark mode.
+- 💾 **Offline Storage** — Expense data is stored locally using Room Database.
+- ✨ **Modern UI** — Material 3 design with cards, animations, transitions, and micro-interactions.
+- 📱 **Responsive Compose UI** — Built entirely with Jetpack Compose.
+
+---
+
+## 🛠️ Tech Stack
 
 | Technology | Purpose |
-|-----------|---------|
-| **Kotlin** | Primary programming language |
-| **Jetpack Compose** | Modern declarative UI toolkit |
-| **Material3** | Design system with dynamic theming |
-| **Room** | Local SQLite database with type-safe queries |
-| **ViewModel + StateFlow** | Reactive state management |
-| **Coroutines** | Asynchronous programming |
-| **Navigation Compose** | Screen-to-screen navigation with transitions |
-| **KSP** | Kotlin Symbol Processing for Room code generation |
-
-## ðŸ—ï¸ Architecture Overview (MVVM)
-
-```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                    UI Layer                      â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”â”‚
-â”‚  â”‚HomeScreen â”‚ â”‚AddExpense    â”‚ â”‚SummaryScreenâ”‚â”‚
-â”‚  â”‚           â”‚ â”‚Screen        â”‚ â”‚             â”‚â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜â”‚
-â”‚        â”‚               â”‚                â”‚       â”‚
-â”‚        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚
-â”‚                        â–¼                        â”‚
-â”‚              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                â”‚
-â”‚              â”‚ ExpenseViewModelâ”‚                â”‚
-â”‚              â”‚  (StateFlow)    â”‚                â”‚
-â”‚              â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”˜                â”‚
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚                Data Layer                       â”‚
-â”‚              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”                â”‚
-â”‚              â”‚ExpenseRepositoryâ”‚                â”‚
-â”‚              â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”˜                â”‚
-â”‚              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”                â”‚
-â”‚              â”‚  ExpenseDao     â”‚                â”‚
-â”‚              â”‚  (Room)         â”‚                â”‚
-â”‚              â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”˜                â”‚
-â”‚              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”                â”‚
-â”‚              â”‚ ExpenseDatabase â”‚                â”‚
-â”‚              â”‚ (SQLite)        â”‚                â”‚
-â”‚              â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-```
-
-## ðŸ“¦ Data Model
-
-### Expense Entity
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | `Int` | Primary key, auto-generated |
-| `title` | `String` | Expense description |
-| `amount` | `Double` | Amount spent |
-| `category` | `String` | Category name (FOOD, TRANSPORT, etc.) |
-| `note` | `String` | Optional note (default: "") |
-| `date` | `Long` | Timestamp in milliseconds |
-
-### Category Enum
-
-| Category | Display Name | Color |
-|----------|-------------|-------|
-| FOOD | Food ðŸœ | #FF6B6B |
-| TRANSPORT | Transport ðŸš— | #4ECDC4 |
-| SHOPPING | Shopping ðŸ› | #FFD93D |
-| ENTERTAINMENT | Entertainment ðŸŽ® | #A78BFA |
-| HEALTH | Health ðŸ’Š | #F472B6 |
-| EDUCATION | Education ðŸ“š | #60A5FA |
-| OTHER | Other ðŸ“¦ | #9CA3AF |
-
-## ðŸ”Œ API Design (Internal â€” Room DAO)
-
-| Method | Return Type | Description |
-|--------|-------------|-------------|
-| `insertExpense(expense)` | `suspend` | Insert or replace an expense |
-| `deleteExpense(expense)` | `suspend` | Delete an expense |
-| `updateExpense(expense)` | `suspend` | Update an existing expense |
-| `getAllExpenses()` | `Flow<List<Expense>>` | Get all expenses, sorted by date DESC |
-| `getExpensesByCategory(cat)` | `Flow<List<Expense>>` | Filter expenses by category |
-| `getTotalAmount()` | `Flow<Double?>` | Sum of all expense amounts |
-| `getCategorySummary()` | `Flow<List<CategorySummary>>` | Grouped totals per category |
-
-## ðŸš€ How to Run
-
-### âœ… Prerequisites
-
-| Requirement | Version | Download |
-|-------------|---------|----------|
-| Android Studio | Ladybug 2024.2.1 or later | [Download](https://developer.android.com/studio) |
-| JDK | 11 or higher | Bundled with Android Studio |
-| Android SDK | API 36 (Android 16.0 "Baklava") | Install via SDK Manager |
-| Android Emulator or Device | API 36+ | Setup below |
+|---|---|
+| Kotlin | Primary programming language |
+| Jetpack Compose | Declarative Android UI toolkit |
+| Material 3 | Modern Android design system |
+| Room Database | Local SQLite persistence |
+| ViewModel | UI state and business logic management |
+| StateFlow / Flow | Reactive state management |
+| Kotlin Coroutines | Asynchronous operations |
+| Navigation Compose | Screen navigation |
+| KSP | Kotlin Symbol Processing and Room code generation |
+| Gradle | Build and dependency management |
 
 ---
 
-### ðŸ“¥ Step 1 â€” Get the Source Code
+## 🏗️ Architecture
 
-**Option A: Clone with Git**
-```bash
-git clone <repository-url>
+SpendWise follows the **MVVM (Model–View–ViewModel)** architecture with a repository layer.
+
+```text
+                    ┌──────────────────────┐
+                    │     Compose UI       │
+                    │ Home / Add / Summary │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │      ViewModel       │
+                    │  UI State + Logic    │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │     Repository       │
+                    │  Data Abstraction    │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │    Room Database     │
+                    │      DAO + Entity    │
+                    └──────────────────────┘
+
+Architecture Layers
+- UI Layer — Jetpack Compose screens responsible for displaying application state and handling user interaction.
+- ViewModel Layer — Manages UI state, coordinates user actions, and communicates with the repository.
+- Repository Layer — Provides a clean abstraction between the ViewModel and local data source.
+- Data Layer — Contains Room entities, DAO interfaces, and database configuration.
+- Utility Layer — Contains reusable helper functionality such as currency and number formatting.
+
+💾 Data Model
+The main Expense entity represents an individual expense.
+Each expense contains information such as:
+Field	Description
+ID	Auto-generated primary key
+Amount	Amount spent
+Category	Expense category
+Title	Expense title
+Note	Optional expense note
+Date	Expense date and timestamp
+
+
+Expense Categories
+- 🍔 Food
+- 🚗 Transport
+- 🛍️ Shopping
+- 🎮 Entertainment
+- 💊 Health
+- 📚 Education
+- 📦 Other
+
+📊 Spending Analytics
+The Summary screen provides visual information about recorded expenses.
+It includes:
+- Total spending
+- Category-wise spending
+- Spending breakdown
+- Category summaries
+- Visual bar charts
+- Animated analytics components
+The application calculates these values from locally stored expense data.
+
+📱 Application Screens
+
+🏠 Home Screen
+The Home screen provides the main expense dashboard.
+It includes:
+- Total spending
+- Expense count
+- Average daily spending
+- Month-based information
+- Category filters
+- Expense list
+- Swipe-to-delete functionality
+- Add Expense action
+
+➕ Add Expense Screen
+Users can create a new expense by entering:
+- Amount
+- Category
+- Title
+- Note
+- Date
+After saving, the expense is stored in the local Room database and becomes available throughout the application.
+
+📊 Summary Screen
+The Summary screen provides spending analytics and category-based breakdowns using the locally stored expense data.
+
+👤 Profile Screen
+The project also contains a profile section for the application's user-facing navigation and settings experience.
+
+📁 Project Structure
+SpendWise/
+├── app/
+│   └── src/
+│       ├── main/
+│       │   ├── java/
+│       │   │   └── com/
+│       │   │       └── sachin/
+│       │   │           └── spendwise/
+│       │   │               ├── MainActivity.kt
+│       │   │               │
+│       │   │               ├── data/
+│       │   │               │   ├── local/
+│       │   │               │   │   ├── ExpenseDao.kt
+│       │   │               │   │   └── ExpenseDatabase.kt
+│       │   │               │   │
+│       │   │               │   ├── model/
+│       │   │               │   │   ├── Expense.kt
+│       │   │               │   │   └── Category.kt
+│       │   │               │   │
+│       │   │               │   └── repository/
+│       │   │               │       └── ExpenseRepository.kt
+│       │   │               │
+│       │   │               ├── navigation/
+│       │   │               │   ├── Screen.kt
+│       │   │               │   └── ExpenseNavGraph.kt
+│       │   │               │
+│       │   │               ├── ui/
+│       │   │               │   ├── screen/
+│       │   │               │   │   ├── HomeScreen.kt
+│       │   │               │   │   ├── AddExpenseScreen.kt
+│       │   │               │   │   ├── SummaryScreen.kt
+│       │   │               │   │   └── ProfileScreen.kt
+│       │   │               │   │
+│       │   │               │   ├── theme/
+│       │   │               │   │   ├── Color.kt
+│       │   │               │   │   ├── Theme.kt
+│       │   │               │   │   └── Type.kt
+│       │   │               │   │
+│       │   │               │   └── viewmodel/
+│       │   │               │       ├── ExpenseViewModel.kt
+│       │   │               │       └── ExpenseViewModelFactory.kt
+│       │   │               │
+│       │   │               └── util/
+│       │   │                   └── FormatUtils.kt
+│       │   │
+│       │   └── res/
+│       │
+│       └── androidTest/
+│
+├── gradle/
+│   └── libs.versions.toml
+│
+├── build.gradle.kts
+├── settings.gradle.kts
+├── gradle.properties
+├── gradlew
+├── gradlew.bat
+└── README.md
+
+⚙️ Project Configuration
+Application ID : com.sachin.spendwise
+Namespace      : com.sachin.spendwise
+Compile SDK    : 37
+Minimum SDK    : 36
+Target SDK     : 36
+Java / JVM     : 17
+
+Build & Dependency Versions
+Android Gradle Plugin : 9.4.0
+Gradle                : 9.6.0
+Kotlin                : 2.3.20
+KSP                   : 2.3.12
+Compose BOM           : 2026.09.00
+Room                  : 2.8.5
+Lifecycle             : 2.11.0
+Activity Compose      : 1.13.0
+Navigation Compose    : 2.10.2
+Coroutines            : 1.10.2
+
+🚀 Getting Started
+Prerequisites
+Make sure the following are installed:
+- Android Studio Quail 4 | 2026.1.4 Patch 1 or newer
+- JDK 17
+- Android SDK Platform 37
+- Android device or emulator running Android 16 / API 36 or newer
+- Git
+
+📥 Clone the Repository
+git clone https://github.com/sachinjangir74/SpendWise.git
 cd SpendWise
-```
 
-**Option B: Download ZIP**
-- Download the ZIP from the repository
-- Extract to any folder
-- Remember the folder path
+🧑‍💻 Open the Project
+1. Open Android Studio.
+2. Select Open.
+3. Select the SpendWise project directory.
+4. Wait for Gradle synchronization to complete.
+5. Make sure the required Android SDK is installed.
+6. Select an Android emulator or connected Android device.
+7. Click Run ▶.
 
----
+📱 Run on an Emulator
+The project can be run using an Android emulator configured with:
+Android Version : Android 16 / newer
+API Level       : 36+
+Architecture    : x86_64
 
-### ðŸ“‚ Step 2 â€” Open in Android Studio
+The project has been tested during development on an Android emulator environment.
 
-1. Launch **Android Studio**
-2. On the Welcome screen, click **"Open"**
-   (or go to **File â†’ Open...** if already inside a project)
-3. Navigate to the **SpendWise** folder
-4. Click **"OK"** / **"Open"**
-5. Wait for the project to index (bottom status bar shows progress)
+📲 Run on a Physical Device
+1. Enable Developer Options on your Android device.
+2. Enable USB Debugging.
+3. Connect the device to your computer.
+4. Accept the debugging authorization prompt.
+5. Select the device from Android Studio.
+6. Click Run ▶.
+The device must support Android 16 / API 36 or newer because the project's minimum SDK is 36.
 
----
+🔨 Build the Project
+From the project root directory:
+Windows
+.\gradlew.bat clean assembleDebug
 
-### ðŸ”§ Step 3 â€” Sync Gradle
+macOS / Linux
+./gradlew clean assembleDebug
 
-1. Android Studio will show a banner:
-   **"Gradle files have changed since last project sync"**
-2. Click **"Sync Now"** (top right of banner)
-3. Wait for sync to complete â€” check the **Build** tab at the bottom
-4. âœ… Success: "BUILD SUCCESSFUL" message
-5. âŒ If sync fails: Go to **File â†’ Invalidate Caches â†’ Invalidate and Restart**
+A successful build generates the debug APK at:
+app/build/outputs/apk/debug/app-debug.apk
 
----
+🧪 Testing
+Run local unit tests with:
+.\gradlew.bat test
 
-### ðŸ“± Step 4A â€” Run on Emulator (Recommended)
+Run Android instrumentation tests with:
+.\gradlew.bat connectedAndroidTest
 
-1. Go to **Device Manager** (right sidebar icon or **View â†’ Tool Windows â†’ Device Manager**)
-2. Click **"+"** â†’ **"Create Virtual Device"**
-3. Choose a phone (e.g. **Pixel 8**) â†’ click Next
-4. Select system image: **"Baklava" (API 36)** â†’ Download if needed â†’ Next
-5. Click **Finish**
-6. Click â–¶ï¸ **Play** button next to your new emulator to start it
-7. Once emulator boots, click the green â–¶ï¸ **Run** button in Android Studio toolbar
-   (or press **Shift + F10** on Windows / **Control + R** on Mac)
-8. Select your emulator â†’ OK
-9. App will install and launch automatically
+The project can also be tested directly through Android Studio using the Run and Debug actions.
 
----
+🗄️ Local Database
+SpendWise uses Room Database for local expense persistence.
+The application stores expense information locally, allowing the core expense-management functionality to work without requiring a remote backend.
+Room provides:
+- Entity-based data modeling
+- DAO interfaces
+- SQLite-backed persistence
+- Kotlin Flow integration
+- Reactive database updates
 
-### ðŸ“² Step 4B â€” Run on Physical Device
+🔒 Privacy
+SpendWise's core expense-management functionality operates locally on the Android device.
+Expense records are stored using the local Room database and do not require a cloud database for normal application usage.
 
-1. On your Android phone, go to **Settings â†’ About Phone**
-2. Tap **"Build Number"** 7 times to enable Developer Options
-3. Go to **Settings â†’ Developer Options**
-4. Enable **"USB Debugging"**
-5. Connect phone to computer via USB cable
-6. On phone: tap **"Allow"** when asked to trust this computer
-7. In Android Studio, select your device from the device dropdown (top toolbar)
-8. Click â–¶ï¸ **Run** (or **Shift + F10** / **Control + R**)
-9. App installs and launches on your phone
+🩺 Troubleshooting
+Gradle Sync Problems
+Try the following:
+1. Make sure Android Studio is using JDK 17.
+2. Make sure Android SDK Platform 37 is installed.
+3. Run:
+.\gradlew.bat clean
 
-> âš ï¸ Note: Physical device must run Android 16 (API 36) or higher due to minSdk=36
+4. Synchronize the project again.
+SDK Error
+Open:
+Tools → SDK Manager
+Make sure the required Android SDK platform and build tools are installed.
+Build Error
+Try:
+.\gradlew.bat clean assembleDebug
 
----
+If the problem persists, check the Gradle output and Android Studio Build window for the exact error.
+Emulator Problems
+Check:
+- Available RAM
+- Available disk space
+- Hardware virtualization
+- Emulator configuration
+- Installed Android system image
+Application Crash
+Open Logcat in Android Studio and inspect the stack trace for the underlying exception.
+Device API Error
+The project uses:
+minSdk = 36
 
-### ðŸ“¦ Step 5 â€” Build APK (Optional)
+Therefore, the device or emulator must run Android 16 / API 36 or newer.
 
-To generate a standalone APK file:
+🎯 Project Highlights
+SpendWise demonstrates practical modern Android development concepts including:
+- Kotlin
+- Jetpack Compose
+- Material 3
+- MVVM Architecture
+- Repository Pattern
+- Room Database
+- SQLite
+- DAO
+- ViewModel
+- StateFlow
+- Kotlin Flow
+- Kotlin Coroutines
+- Navigation Compose
+- KSP
+- Offline-first application design
+- Reactive UI updates
+- Expense management
+- Category filtering
+- Swipe gestures
+- Spending analytics
+- Modern Android UI
+- Dark mode support
 
-**Option A: Via Android Studio**
-1. Go to **Build â†’ Build Bundle(s) / APK(s) â†’ Build APK(s)**
-2. Wait for build to complete
-3. Click **"locate"** in the notification to find the APK
+🔄 Application Flow
+Launch Application
+        │
+        ▼
+   Home Screen
+        │
+        ├───────────────┐
+        │               │
+        ▼               ▼
+ Add Expense        Summary
+        │               │
+        ▼               ▼
+  Save Expense      Analytics
+        │
+        ▼
+  Room Database
+        │
+        ▼
+ ViewModel / Flow
+        │
+        ▼
+   Updated UI
 
-**Option B: Via Terminal**
-```bash
-./gradlew assembleDebug
-```
+💡 Learning Objectives
+This project was developed to practice and demonstrate:
+- Modern Android application development
+- Kotlin programming
+- Declarative UI development with Jetpack Compose
+- MVVM architecture
+- Local database management with Room
+- Reactive programming using Flow and StateFlow
+- Dependency and build management with Gradle
+- Android navigation
+- State-driven UI
+- Material 3 design
+- Application testing and debugging
+- Modern Android project modernization
 
-APK location: `app/build/outputs/apk/debug/app-debug.apk`
+👨‍💻 Author
+Sachin Jangir
+Android & Software Development
 
----
+📄 License
+This project is intended for learning, and portfolio purposes as part of Android and mobile application development practice.
 
-### â“ Troubleshooting
-
-| Problem | Solution |
-|---------|----------|
-| Gradle sync fails | File â†’ Invalidate Caches â†’ Restart |
-| SDK not found | Open SDK Manager, install API 36 |
-| Emulator won't start | Increase RAM in AVD config, enable hardware acceleration |
-| App crashes on launch | Check Logcat tab for errors |
-| "minSdk" device error | Use device/emulator with Android 16 (API 36+) |
-
-## ðŸ“¸ Screenshots
-
-| Home Screen | Add Expense | Summary |
-|:-----------:|:-----------:|:-------:|
-| *Gradient header with total spent, category filters, expense list* | *Amount hero display, category grid, form fields* | *Overview cards, bar chart, category breakdown* |
-
-## ðŸ“ Project Structure
-
-```
-app/src/main/java/com/sachin/spendwise/
-â”œâ”€â”€ MainActivity.kt
-â”œâ”€â”€ data/
-â”‚   â”œâ”€â”€ model/
-â”‚   â”‚   â”œâ”€â”€ Expense.kt          # Room entity
-â”‚   â”‚   â””â”€â”€ Category.kt         # Category enum
-â”‚   â”œâ”€â”€ local/
-â”‚   â”‚   â”œâ”€â”€ ExpenseDao.kt       # Data Access Object
-â”‚   â”‚   â””â”€â”€ ExpenseDatabase.kt  # Room database
-â”‚   â””â”€â”€ repository/
-â”‚       â””â”€â”€ ExpenseRepository.kt
-â”œâ”€â”€ ui/
-â”‚   â”œâ”€â”€ screen/
-â”‚   â”‚   â”œâ”€â”€ HomeScreen.kt       # Main expense list
-â”‚   â”‚   â”œâ”€â”€ AddExpenseScreen.kt # Add new expense
-â”‚   â”‚   â””â”€â”€ SummaryScreen.kt    # Spending summary
-â”‚   â”œâ”€â”€ viewmodel/
-â”‚   â”‚   â”œâ”€â”€ ExpenseViewModel.kt
-â”‚   â”‚   â””â”€â”€ ExpenseViewModelFactory.kt
-â”‚   â””â”€â”€ theme/
-â”‚       â”œâ”€â”€ Color.kt
-â”‚       â”œâ”€â”€ Type.kt
-â”‚       â””â”€â”€ Theme.kt
-â”œâ”€â”€ navigation/
-â”‚   â”œâ”€â”€ Screen.kt
-â”‚   â””â”€â”€ ExpenseNavGraph.kt
-â””â”€â”€ util/
-    â””â”€â”€ FormatUtils.kt
-```
-
-## ðŸ“„ License
-
-This project is for educational purposes as part of a Mobile Development course assignment.
-
+⭐ Acknowledgements
+Built with:
+- Kotlin
+- Jetpack Compose
+- Android Jetpack
+- Material 3
+- Room Database
+- Android Studio
