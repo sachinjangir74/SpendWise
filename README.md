@@ -75,13 +75,13 @@ Architecture Layers
 💾 Data Model
 The main Expense entity represents an individual expense.
 Each expense contains information such as:
-Field	Description
-ID	Auto-generated primary key
-Amount	Amount spent
+Field		Description
+ID	    Auto-generated primary key
+Amount	    Amount spent
 Category	Expense category
-Title	Expense title
-Note	Optional expense note
-Date	Expense date and timestamp
+Title	    Expense title
+Note	    Optional expense note
+Date	    Expense date and timestamp
 
 Expense Categories
 - 🍔 Food
