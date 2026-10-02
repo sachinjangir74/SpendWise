@@ -1,0 +1,37 @@
+# Gradle
+.gradle/
+**/build/
+
+# Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Kotlin
+.kotlin/
+
+# Local machine configuration
+local.properties
+
+# Android generated files
+.externalNativeBuild/
+.cxx/
+captures/
+
+# Build outputs
+*.apk
+*.aab
+*.apks
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs / temporary files
+*.log
+build-error.txt
+
+# Environment / secrets
+.env
+.env.*
