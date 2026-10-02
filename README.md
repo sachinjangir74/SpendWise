@@ -76,7 +76,7 @@ Architecture Layers
 The main Expense entity represents an individual expense.
 Each expense contains information such as:
 Field		Description
-ID	    Auto-generated primary key
+ID	        Auto-generated primary key
 Amount	    Amount spent
 Category	Expense category
 Title	    Expense title
